@@ -4,9 +4,11 @@ import { Request, Response } from "express"
 import { AppDataSource } from "./data-source"
 import { Routes } from "./routes"
 import { User } from "./entity/User"
+import { Products } from "./entity/Products"
 
 AppDataSource.initialize().then(async () => {
 
+    
     // create express app
     const app = express()
     app.use(bodyParser.json())
@@ -31,21 +33,26 @@ AppDataSource.initialize().then(async () => {
     app.listen(3000)
 
     // insert new users for test
-    await AppDataSource.manager.save(
-        AppDataSource.manager.create(User, {
-            firstName: "Timber",
-            lastName: "Saw",
-            age: 27
-        })
-    )
+    // await AppDataSource.manager.save(
+    //     AppDataSource.manager.create(Products, {
+    //         title: "Timber",
+    //         description: "Saw",
+    //         price: 27,
+    //         category: 'informatique',
+    //         isSaled: false
+    //     })
+    // )
 
-    await AppDataSource.manager.save(
-        AppDataSource.manager.create(User, {
-            firstName: "Phantom",
-            lastName: "Assassin",
-            age: 24
-        })
-    )
+    // await AppDataSource.manager.save(
+    //     AppDataSource.manager.create(User, {
+    //         firstName: "Phantom",
+    //         lastName: "Assassin",
+    //         age: 24
+    //     })
+    // )
+
+    // ALTER TABLE User ADD products Product FOREIGN KEY (products) REFERENCES Products(id);
+    //         ALTER TABLE Products ADD user User FOREIGN KEY (user) REFERENCES User(id); 
 
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results")
 

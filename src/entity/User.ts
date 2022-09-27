@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { type } from "os"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinTable, JoinColumn, ManyToOne, OneToOne } from "typeorm"
+import { Products } from "./Products"
 
 @Entity()
 export class User {
@@ -14,5 +16,9 @@ export class User {
 
     @Column()
     age: number
+
+    @OneToOne(() => Products, (products)=> products.userId)
+    @JoinColumn({name: 'productsId'}) 
+    products: Products[]
 
 }
