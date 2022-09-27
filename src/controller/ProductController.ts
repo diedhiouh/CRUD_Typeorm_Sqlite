@@ -43,8 +43,9 @@ export class ProductController {
     }
 
     async removePorduct(req: Request, res: Response){
+        let productToRemove = await this.productRepository.findOneBy({ id: req.params.id })
 
-        this.productRepository.delete(req.params.id)
+        this.productRepository.delete(productToRemove)
         
     }
 
